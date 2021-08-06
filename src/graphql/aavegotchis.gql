@@ -1,0 +1,8 @@
+query getAavegotchis {
+	aavegotchis(first: 100, orderBy: gotchiId) {
+		id
+		name
+		collateral
+		withSetsNumericTraits
+	}
+}

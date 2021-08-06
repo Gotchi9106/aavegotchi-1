@@ -1,14 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+
+import "bulma/css/bulma.css";
+// import "@fortawesome/fontawesome-free/css/all.css";
+
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+
+const client = new ApolloClient({
+	uri:
+		"https://api.thegraph.com/subgraphs/name/aavegotchi/aavegotchi-core-matic",
+	cache: new InMemoryCache(),
+});
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+	<React.StrictMode>
+		<ApolloProvider client={client}>
+			<App />
+		</ApolloProvider>
+	</React.StrictMode>,
+	document.getElementById("root"),
 );
 
 // If you want to start measuring performance in your app, pass a function

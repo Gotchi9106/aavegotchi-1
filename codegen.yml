@@ -1,0 +1,15 @@
+overwrite: true
+schema: "https://api.thegraph.com/subgraphs/name/aavegotchi/aavegotchi-core-matic"
+documents: "src/**/*.(graphql|gql)"
+generates:
+  src/types/graphql.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+      - "fragment-matcher"
+    config:
+      useExplicitTyping: true
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"
