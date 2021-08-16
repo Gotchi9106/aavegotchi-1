@@ -8,6 +8,7 @@ import "bulma/css/bulma.css";
 // import "@fortawesome/fontawesome-free/css/all.css";
 
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import { GotchiProvider } from "./hooks";
 
 const client = new ApolloClient({
 	uri:
@@ -18,7 +19,9 @@ const client = new ApolloClient({
 ReactDOM.render(
 	<React.StrictMode>
 		<ApolloProvider client={client}>
-			<App />
+			<GotchiProvider>
+				<App />
+			</GotchiProvider>
 		</ApolloProvider>
 	</React.StrictMode>,
 	document.getElementById("root"),

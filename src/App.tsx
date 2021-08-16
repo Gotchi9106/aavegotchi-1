@@ -1,10 +1,17 @@
 import { useEffect } from "react";
-import { Container, Hero, ProgressBar } from "@faramo.zayw/reabulma";
+import {
+	Column,
+	Columns,
+	Container,
+	Hero,
+	ProgressBar,
+} from "@faramo.zayw/reabulma";
 
 import "./App.css";
 
 import { useGetAavegotchisQuery } from "./types/graphql";
 import { AavegotchisList } from "./components";
+import { SelectedGotchi } from "./components/selected-gotchi";
 
 const App = () => {
 	const { data, loading } = useGetAavegotchisQuery();
@@ -17,7 +24,14 @@ const App = () => {
 				{loading ? (
 					<ProgressBar isColor="info" />
 				) : (
-					<AavegotchisList aavegotchis={data!.aavegotchis} />
+					<Columns>
+						<Column isSize="1/2">
+							<SelectedGotchi name="asda" traits={[]} />
+						</Column>
+						<Column isSize="1/2">
+							<AavegotchisList aavegotchis={data!.aavegotchis} />
+						</Column>
+					</Columns>
 				)}
 			</Container>
 		</Hero>

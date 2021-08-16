@@ -1,4 +1,6 @@
 import type { FC } from "react";
+import { useEffect } from "react";
+import { useGotchi } from "../../hooks";
 
 import type { Aavegotchi } from "../../types/graphql";
 
@@ -10,10 +12,21 @@ interface AavegotchisListProps {
 }
 
 export const AavegotchisList: FC<AavegotchisListProps> = ({ aavegotchis }) => {
+	const { selectedGotchiID, setGotchiID } = useGotchi();
+
+	useEffect(() => console.log(selectedGotchiID), [selectedGotchiID]);
+
 	return (
 		<div className={styles.aavegotchisList}>
 			{aavegotchis.map((gotchi, i) => {
-				return <AavegotchiCard key={i} {...gotchi} />;
+				return (
+					<AavegotchiCard
+						{...gotchi}
+						key={i}
+						onClick={() => setGotchiID(gotchi.id)}
+						isSelected={gotchi.id === selectedGotchiID}
+					/>
+				);
 			})}
 		</div>
 	);
