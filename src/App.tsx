@@ -1,35 +1,29 @@
-import { useEffect } from "react";
-import {
-	Column,
-	Columns,
-	Container,
-	Hero,
-	ProgressBar,
-} from "@faramo.zayw/reabulma";
+import { Column, Columns, Container, Hero } from "@faramo.zayw/reabulma";
 
 import "./App.css";
 
-import { useGetAavegotchisQuery } from "./types/graphql";
 import { AavegotchisList } from "./components";
 import { SelectedGotchi } from "./components/selected-gotchi";
+import { useGotchi } from "./hooks";
 
 const App = () => {
-	const { data, loading } = useGetAavegotchisQuery();
-
-	useEffect(() => {}, [data]);
+	const { aavegotchis, activeGotchi } = useGotchi();
 
 	return (
-		<Hero isColor="black" isFullHeight>
-			<Container>
-				{loading ? (
-					<ProgressBar isColor="info" />
-				) : (
-					<Columns>
+		<Hero isColor="black" isFullHeight isClipped>
+			<Container className="is-fluid" spacing={["px-6"]}>
+				{aavegotchis && (
+					<Columns style={{ minWidth: "50vw !important" }}>
 						<Column isSize="1/2">
-							<SelectedGotchi name="asda" traits={[]} />
+							{activeGotchi && activeGotchi?.withSetsNumericTraits && (
+								<SelectedGotchi
+									name={activeGotchi.name}
+									traits={activeGotchi?.withSetsNumericTraits}
+								/>
+							)}
 						</Column>
 						<Column isSize="1/2">
-							<AavegotchisList aavegotchis={data!.aavegotchis} />
+							<AavegotchisList aavegotchis={aavegotchis ?? []} />
 						</Column>
 					</Columns>
 				)}

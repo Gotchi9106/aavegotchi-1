@@ -2057,10 +2057,10 @@
     "@ethersproject/properties" "^5.4.0"
     "@ethersproject/strings" "^5.4.0"
 
-"@faramo.zayw/reabulma@^0.2.3":
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/@faramo.zayw/reabulma/-/reabulma-0.2.3.tgz#a9fd49977b1f4ae7e1d4978c496f797c83dab33f"
-  integrity sha512-qAS7Q1H2BfQHB/88rt86rXwN5DnLfqCWYU8viM9Icjwe21dAS87h1CzJy8NFeA4TCDlrAFuIqyyqKr4EP0Q4Mg==
+"@faramo.zayw/reabulma@^0.2.4":
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/@faramo.zayw/reabulma/-/reabulma-0.2.4.tgz#8deed73d449844df3be9edea5ba3328abd56275c"
+  integrity sha512-F4X1JdOPXa/HP5NR+KAQkMgVP5yd3cYrpjcZNA9HzY785vKW46n2yRePaW6+5hoJiu/ybY93fakrhUoI86KJsg==
   dependencies:
     classnames "^2.2.6"
 

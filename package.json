@@ -4,7 +4,7 @@
 	"private": true,
 	"dependencies": {
 		"@apollo/client": "^3.4.5",
-		"@faramo.zayw/reabulma": "^0.2.3",
+		"@faramo.zayw/reabulma": "^0.2.4",
 		"@faramo.zayw/rustype": "^0.3.1",
 		"@testing-library/jest-dom": "^5.11.4",
 		"@testing-library/react": "^11.1.0",
