@@ -14,8 +14,10 @@ import { useGotchi } from "./hooks";
 const diamondAddress = "0x86935F11C86623deC8a25696E1C19a8659CbF95d";
 
 const App = () => {
-	const { aavegotchis, activeGotchi } = useGotchi();
+	const { aavegotchis, activeGotchi, selectedGotchiID } = useGotchi();
 	const [contract, setContract] = useState<Contract | null>(null);
+	const [gotchiSVG, setGotchiSVG] = useState<string>("");
+	const [loadingSVG, setLoadingSVG] = useState(false);
 
 	const connectToWeb3 = () => {
 		const web3 = new Web3(Web3.givenProvider);
@@ -29,15 +31,20 @@ const App = () => {
 	useEffect(() => connectToWeb3(), []);
 
 	useEffect(() => {
-		if (!!contract) {
-			const fetchAavegotchiCollaterals = async () => {
-				const collaterals = await contract.methods.getCollateralInfo().call();
-				console.log(collaterals);
-			};
+		const getAavegotchiSVG = async (tokenId: string) => {
+			try {
+				const svg = await contract?.methods.getAavegotchiSvg(tokenId).call();
+				setGotchiSVG(svg);
+			} finally {
+				setLoadingSVG(false);
+			}
+		};
 
-			fetchAavegotchiCollaterals();
+		if (contract && selectedGotchiID) {
+			setLoadingSVG(true);
+			getAavegotchiSVG(selectedGotchiID);
 		}
-	}, [contract]);
+	}, [selectedGotchiID, contract]);
 
 	return (
 		<Hero isColor="black" isFullHeight isClipped>
@@ -47,6 +54,8 @@ const App = () => {
 						<Column isSize="1/2">
 							{activeGotchi && activeGotchi?.withSetsNumericTraits && (
 								<SelectedGotchi
+									loadingSVG={loadingSVG}
+									svg={gotchiSVG}
 									name={activeGotchi.name}
 									traits={activeGotchi?.withSetsNumericTraits}
 								/>

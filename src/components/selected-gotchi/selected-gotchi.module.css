@@ -10,6 +10,16 @@
 }
 
 .svgContainer {
+	display: flex;
+	align-items: center;
+	align-content: center;
+	justify-content: center;
+}
+
+.svg {
+	width: 500px;
+	border-radius: 10px;
+	overflow: hidden;
 }
 
 .trait {

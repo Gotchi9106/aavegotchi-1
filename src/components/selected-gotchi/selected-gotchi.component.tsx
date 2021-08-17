@@ -6,6 +6,7 @@ import {
 	Notification,
 	Tag,
 	Container,
+	ProgressBar,
 } from "@faramo.zayw/reabulma";
 
 import styled from "./selected-gotchi.module.css";
@@ -13,6 +14,8 @@ import styled from "./selected-gotchi.module.css";
 interface SelectedGotchiProps {
 	name: string;
 	traits: number[];
+	svg: string;
+	loadingSVG?: boolean;
 }
 
 const Trait: FC<{ title: string; trait: number }> = ({ title, trait }) => {
@@ -45,7 +48,12 @@ const traitsNames = [
 	"👁 Eye color",
 ] as const;
 
-export const SelectedGotchi: FC<SelectedGotchiProps> = ({ name, traits }) => {
+export const SelectedGotchi: FC<SelectedGotchiProps> = ({
+	name,
+	traits,
+	svg,
+	loadingSVG,
+}) => {
 	return (
 		<Container
 			className={styled.selectedGotchiWrapper}
@@ -64,7 +72,16 @@ export const SelectedGotchi: FC<SelectedGotchiProps> = ({ name, traits }) => {
 			>
 				{name}
 			</Title>
-			<div className={styled.svgContainer} />
+			{loadingSVG ? (
+				<ProgressBar isColor="success" />
+			) : (
+				<div className={styled.svgContainer}>
+					<div
+						className={styled.svg}
+						dangerouslySetInnerHTML={{ __html: svg }}
+					/>
+				</div>
+			)}
 			<Notification
 				hasBackgroundColor="black-ter"
 				hasTextColor="info"
